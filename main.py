@@ -2,11 +2,18 @@
 # Table 2 = [dst, tmsp, is_spam]
 # Table 3 = [dst, src, spam_count]
 
+from datetime import datetime
+
+def getTimestampDifference(timestamp1, timestamp2):
+    parsedTimestamp1 = datetime.strptime(timestamp1, '%Y-%m-%d %H:%M:%S')
+    parsedTimestamp2 = datetime.strptime(timestamp2, '%Y-%m-%d %H:%M:%S')
+    return abs(parsedTimestamp1 - parsedTimestamp2)
+
 def findSource(table1, destination, timestamp):
     rowsToCheck = [row for row in table1 if row[1] == destination]
     for row in rowsToCheck:
         source = row[0]
-        timestampDifference = int(timestamp[-1]) - int(row[2][-1])
+        timestampDifference = getTimestampDifference(row[2], timestamp)
         if timestampDifference <= 2:
             return source
     return None
