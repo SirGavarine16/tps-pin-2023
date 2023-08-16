@@ -8,9 +8,9 @@ Table 3 -> dst, src, spam_count
 
 ## Business Logic
 
+```
 create table 3
 
-```
 For each element in Table 2
 	if is marked as spam:
 		find source by comparing destination and timestamp
